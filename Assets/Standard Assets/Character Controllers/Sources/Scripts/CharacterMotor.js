@@ -180,7 +180,7 @@ function Awake () {
 }
 
 private function UpdateFunction () {
-	if (this.networkView.isMine) canControl = true;
+	canControl = true;
 	// We copy the actual velocity into a temporary variable that we can manipulate.
 	var velocity : Vector3 = movement.velocity;
 	

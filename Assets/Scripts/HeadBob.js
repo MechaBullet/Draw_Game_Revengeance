@@ -1,20 +1,17 @@
 ﻿private var timer = 0.0; 
 var bobbingSpeed = 0.18; 
 var bobbingAmount = 0.2; 
-var midpoint = 1.0; 
+public var midpoint = 1.0;
  
 function Update () 
 { 
-	if (this.transform.root.networkView.isMine) {
-		HeadBob();
-	}
+	HeadBob();
 }
 
 function HeadBob() {
-	waveslice = 0.0; 
+   waveslice = 0.0; 
    horizontal = Input.GetAxis("Horizontal"); 
    vertical = Input.GetAxis("Vertical"); 
-    
    if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0) 
    { 
       timer = 0.0; 

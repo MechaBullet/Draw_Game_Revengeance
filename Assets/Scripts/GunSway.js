@@ -9,13 +9,10 @@ var tiltAngle = 25;
 private var def : Vector3;
  
 function Start () {
-	if (this.transform.root.transform.networkView.isMine) {
     	def = transform.localPosition;
-    }
 }
  
 function Update () {
-	if (this.transform.root.transform.networkView.isMine) {
         var factorX : float = -Input.GetAxis("Mouse X") * amount;
         var factorY : float = -Input.GetAxis("Mouse Y") * amountY;
        
@@ -40,5 +37,5 @@ function Update () {
         var tiltAroundX = Input.GetAxis("Mouse Y") * tiltAngle;
         var target = Quaternion.Euler (tiltAroundX, 0, tiltAroundZ);
         transform.localRotation = Quaternion.Slerp(transform.localRotation, target,Time.deltaTime * SmoothRotation);
-    }
+ 
 }

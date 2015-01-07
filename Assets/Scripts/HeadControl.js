@@ -9,10 +9,8 @@ function Start () {
 }
 
 function Update(){ 
-	if (this.transform.root.networkView.isMine) {	
 		rotationY += Input.GetAxis("Mouse Y") * speed;
 		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 				
 		transform.localEulerAngles = new Vector3(0, -rotationY, 0);
-	}
 } 

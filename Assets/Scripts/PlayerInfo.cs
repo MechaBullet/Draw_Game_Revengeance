@@ -3,7 +3,9 @@ using System.Collections;
 
 public class PlayerInfo : MonoBehaviour
 {
-	float health = 100;
+	public float maxHealth = 100;
+	public float health;
+
 	private float lastSynchronizationTime = 0f;
 	private float syncDelay = 0f;
 	private float syncTime = 0f;
@@ -11,27 +13,34 @@ public class PlayerInfo : MonoBehaviour
 	private Vector3 syncEndPosition = Vector3.zero;
 	private Quaternion syncStartRotation = Quaternion.identity;
 	private Quaternion syncEndRotation = Quaternion.identity;
+
 	private CharacterMotor motor;
 	public GameObject playerModel;
 	public GameObject playerPrefab;
 	public GameObject ragdollPrefab;
-	public GameObject postMortemPrefab;
 	Color originalColor;
-	
+
+	private int kills;
+	private int deaths;
+
+	GameObject[] spawnPoints;
+	Transform ragdollSpawnPoint;
+	Transform spawnPoint;
 	// Use this for initialization
 	void Awake () {
+		health = maxHealth;
 		Screen.showCursor = false;
 		originalColor = playerModel.renderer.material.color;
 		motor = GetComponent("CharacterMotor") as CharacterMotor;
-
+		spawnPoints = GameObject.FindGameObjectsWithTag("Spawn");
 	}
 	//If this is the player object your network is linked to, give controls
     void Update()
     {
-		if(networkView.isMine) fpsInput();
-		else SyncedMovement();
+		fpsInput();
+		if(health < 100) Dead();
     }
-
+	
 	public void Damage(float damage) {
 		playerModel.renderer.material.color = Color.red;
 		StartCoroutine(ToOriginalColor());
@@ -41,67 +50,37 @@ public class PlayerInfo : MonoBehaviour
 	}
 
 	void Dead() {
-		Transform spawnPoint;
-		spawnPoint = this.transform;
+		Transform ragdollSpawnPoint = this.transform;
 		Debug.Log("Player is dead");
-		Network.Instantiate(postMortemPrefab, spawnPoint.position + new Vector3(0, 5, 0), spawnPoint.rotation, 0);
-		Network.Destroy(this.gameObject);
-		Network.Instantiate(ragdollPrefab, spawnPoint.position, spawnPoint.rotation, 0);
-		StartCoroutine(Respawn());
+		//Network.Instantiate(postMortemPrefab, spawnPoint.position + new Vector3(0, 5, 0), spawnPoint.rotation, 0);
+		//Network.Destroy(this.gameObject);
+		deaths += 1;
+		Respawn();
+		Instantiate(ragdollPrefab, ragdollSpawnPoint.position, ragdollSpawnPoint.rotation);
 	}
 
 	IEnumerator ToOriginalColor() {
 		Debug.Log("Success");
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.25f);
 		playerModel.renderer.material.color = originalColor;
 	}
 
-	IEnumerator Respawn() {
-		yield return new WaitForSeconds(3);
-		Network.Instantiate(playerPrefab, Vector3.up * 5, playerPrefab.transform.rotation, 0);
+	void Respawn() {
+		spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length - 1)].transform;
+		spawnPoint.transform.Rotate(new Vector3(0, Random.Range(-360, 360), 0));
+		//Network.Instantiate(playerPrefab, Vector3.up * 5, playerPrefab.transform.rotation, 0);
+		health = maxHealth;
+		transform.position = spawnPoint.position;
+		transform.rotation = spawnPoint.rotation;
+		//rigidbody.velocity = Vector3.zero;
 	}
 
-	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
-	{
-		Vector3 syncPosition = Vector3.zero;
-		Quaternion syncRotation = Quaternion.identity;
-
-		if (stream.isWriting)
-		{
-			syncPosition = transform.position;
-			stream.Serialize(ref syncPosition);
-
-			/*syncVelocity = transform.velocity;
-			stream.Serialize(ref syncVelocity);*/
-
-			syncRotation = transform.rotation;
-			stream.Serialize(ref syncRotation);
-
-			/*syncAngularVelocity = transform.angularVelocity;
-			stream.Serialize(ref syncAngularVelocity);*/
-		}
-		else
-		{
-			stream.Serialize(ref syncPosition);
-			//stream.Serialize(ref syncVelocity);
-			stream.Serialize(ref syncRotation);
-			//stream.Serialize(ref syncAngularVelocity);
-			syncTime = 0f;
-			syncDelay = Time.time - lastSynchronizationTime;
-			lastSynchronizationTime = Time.time;
-
-			syncEndPosition = syncPosition;
-			syncStartPosition = transform.position;
-
-			syncEndRotation = syncRotation;
-			syncStartRotation = transform.rotation;
-		}
-	}
-
-	private void SyncedMovement() {
-		syncTime += Time.deltaTime;
-		transform.position = Vector3.Lerp (syncStartPosition, syncEndPosition, syncTime / syncDelay);
-		transform.rotation = Quaternion.Lerp (syncStartRotation, syncEndRotation, syncTime / syncDelay);
+	private void OnGUI() {
+			float width = 100;
+			float height = 50;
+			float x = (Screen.width / 2) - (width/2);
+			float y = Screen.height - 100 - (height/2);
+			GUI.Label(new Rect(x, y, width, height), "Health: " + health);
 	}
 
 	private void fpsInput() {

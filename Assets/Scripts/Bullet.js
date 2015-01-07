@@ -17,13 +17,13 @@
        
        // If the Bullet has existed as long as SecondsUntilDestroy, destroy it 
        if (Time.time - startTime >= SecondsUntilDestroy && !collided) {
-           Network.Destroy(this.gameObject);
+           Destroy(this.gameObject);
        } 
    }
         
    function OnCollisionEnter(coll : Collision) {
         // Remove the Bullet from the world
-        Network.Destroy(this.gameObject);
+        Destroy(this.gameObject);
        	//Destroy(this.gameObject);
        	collided = true;
    }

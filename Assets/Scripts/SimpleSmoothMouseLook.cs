@@ -30,7 +30,6 @@ public class SimpleSmoothMouseLook : MonoBehaviour
 	
 	void Update()
 	{
-		if(characterBody.networkView.isMine) {
 			// Ensure the cursor is always locked when set
 			Screen.lockCursor = lockCursor;
 			
@@ -76,7 +75,6 @@ public class SimpleSmoothMouseLook : MonoBehaviour
 				var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, transform.InverseTransformDirection(Vector3.up));
 				transform.localRotation *= yRotation;
 			}
-		}
 	}
 }
 

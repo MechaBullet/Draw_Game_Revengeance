@@ -7,8 +7,9 @@ public class Shooting : MonoBehaviour {
 	public GameObject raycastObject;
 	public Transform origin;
 	public GameObject bullet;
-	public GameObject camera;
+	//public GameObject cameraObject;
 	bool reloading, firing;
+	public bool showCrosshair = true;
 	//Gun Stats
 	public int range, maxClip, damage;
 	public float recoil, bulletSpread, fireRate, reloadTime;
@@ -21,19 +22,17 @@ public class Shooting : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(this.transform.root.gameObject.networkView.isMine) {
 			if(Input.GetMouseButtonDown(0) && bullets > 0 && !firing) {
 				StartCoroutine(Fire());
 			}
 			else if(Input.GetKeyDown(KeyCode.R) && bullets < maxClip && !reloading) {
 				StartCoroutine(Reload(reloadTime));
 			}
-		}
 	}
 
 	void OnGUI()
 	{
-		if(this.transform.root.gameObject.networkView.isMine) {
+		if(showCrosshair) {
 			float xMin = (Screen.width / 2) - (crosshairImage.width / 2);
 			float yMin = (Screen.height / 2) - (crosshairImage.height / 2);
 			GUI.DrawTexture(new Rect(xMin, yMin, crosshairImage.width, crosshairImage.height), crosshairImage);
@@ -47,10 +46,11 @@ public class Shooting : MonoBehaviour {
 		Debug.Log(bullets);
 		RaycastHit hit;
 		Vector3 fwd = raycastObject.transform.TransformDirection(Vector3.forward);
+		Debug.DrawRay(raycastObject.transform.position, fwd, Color.green);
 		if(Physics.Raycast(raycastObject.transform.position, /*new Vector3(fwd.x * displacement.x, fwd.y * displacement.y, fwd.z * displacement.z)*/ fwd, out hit, range)) {
-			if(hit.transform.root.tag == "Player") {
-				PlayerInfo player = hit.transform.root.GetComponent("PlayerInfo") as PlayerInfo;
-				player.Damage(damage);
+			if(hit.transform.root.tag == "Enemy") {
+				EnemyBehavior enemyBehavior = hit.transform.gameObject.GetComponent("EnemyBehavior") as EnemyBehavior;
+				enemyBehavior.Damage(damage);
 			}
 		}
 	}
@@ -68,7 +68,7 @@ public class Shooting : MonoBehaviour {
 		float xRand = Random.Range(-bulletSpread, bulletSpread);
 		float yRand = Random.Range(-bulletSpread, bulletSpread);
 		Quaternion spread = Quaternion.Euler(xRand, yRand, origin.transform.rotation.z);
-		Network.Instantiate(bullet, origin.transform.position, origin.transform.rotation, 0);
+		Instantiate(bullet, origin.transform.position, origin.transform.rotation);
 		Vector3 spreadVector = new Vector3(xRand, yRand, 1);
 		CheckForHit(spreadVector);
 		yield return new WaitForSeconds(fireRate);

@@ -46,12 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Flicker.js" />
-     <Compile Include="Assets\HeadControl.js" />
      <Compile Include="Assets\Scripts\Bullet.js" />
+     <Compile Include="Assets\Scripts\Flicker.js" />
      <Compile Include="Assets\Scripts\Gradientbackground.js" />
      <Compile Include="Assets\Scripts\GunSway.js" />
      <Compile Include="Assets\Scripts\HeadBob.js" />
+     <Compile Include="Assets\Scripts\HeadControl.js" />
      <Compile Include="Assets\Scripts\Recoil.js" />
      <Compile Include="Assets\Scripts\RopeLine.js" />
      <Compile Include="Assets\Scripts\TimeCycle.js" />

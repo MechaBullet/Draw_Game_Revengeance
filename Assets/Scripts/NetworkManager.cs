@@ -10,6 +10,7 @@ public class NetworkManager : MonoBehaviour
     private HostData[] hostList;
 
     public GameObject playerPrefab;
+	GameObject[] spawnPoints;
 
 	//Create GUI buttons for connecting to and starting a server
     void OnGUI()
@@ -75,9 +76,17 @@ public class NetworkManager : MonoBehaviour
         SpawnPlayer();
     }
 
-
+	[RPC]
+	void Damage(GameObject target, float damage) {
+		PlayerInfo infoScript = target.GetComponent("PlayerInfo") as PlayerInfo;
+		infoScript.health -= damage;
+	}
+	
     private void SpawnPlayer()
     {
-        Network.Instantiate(playerPrefab, playerPrefab.transform.position, playerPrefab.transform.rotation, 0);
+		spawnPoints = GameObject.FindGameObjectsWithTag("Spawn");
+		Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length - 1)].transform;
+		spawnPoint.Rotate(new Vector3(0, Random.Range(-360, 360), 0));
+        Network.Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation, 0);
     }
 }
