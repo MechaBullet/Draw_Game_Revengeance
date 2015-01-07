@@ -1,0 +1,6 @@
+Dev Notes - 12/14
+
+Moved shooting script to be attached to the gun to make weapon switching simpler
+Added a reload time (No animation, 3 second default)
+Added a 6 Bullet clip (To work with reload)
+Making the shooting script more flexible (for future weapons)
