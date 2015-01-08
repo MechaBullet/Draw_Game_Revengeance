@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e8b01323145eb214ca8e91c98ebb5227
+guid: 13a0a7683d7b49646bff632bbc88f741
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -7,13 +7,12 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Grid
-    6400000: //RootNode
+    4300000: Torus
     7400000: Default Take
     9500000: //RootNode
   materials:
     importMaterials: 1
-    materialName: 2
+    materialName: 0
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
@@ -32,7 +31,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -44,7 +43,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
   tangentSpace:
-    normalSmoothAngle: 0
+    normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
