@@ -5,15 +5,7 @@ public class PlayerInfo : MonoBehaviour
 {
 	public float maxHealth = 100;
 	public float health;
-
-	private float lastSynchronizationTime = 0f;
-	private float syncDelay = 0f;
-	private float syncTime = 0f;
-	private Vector3 syncStartPosition = Vector3.zero;
-	private Vector3 syncEndPosition = Vector3.zero;
-	private Quaternion syncStartRotation = Quaternion.identity;
-	private Quaternion syncEndRotation = Quaternion.identity;
-
+	
 	private CharacterMotor motor;
 	public GameObject playerModel;
 	public GameObject playerPrefab;
@@ -26,6 +18,7 @@ public class PlayerInfo : MonoBehaviour
 	GameObject[] spawnPoints;
 	Transform ragdollSpawnPoint;
 	Transform spawnPoint;
+
 	// Use this for initialization
 	void Awake () {
 		health = maxHealth;
@@ -43,7 +36,6 @@ public class PlayerInfo : MonoBehaviour
 	
 	public void Damage(float damage) {
 		playerModel.renderer.material.color = Color.red;
-		StartCoroutine(ToOriginalColor());
 		health -= damage;
 		Debug.Log("Player is at " + health + " health.");
 		if (health < 1) Dead();
@@ -52,27 +44,8 @@ public class PlayerInfo : MonoBehaviour
 	void Dead() {
 		Transform ragdollSpawnPoint = this.transform;
 		Debug.Log("Player is dead");
-		//Network.Instantiate(postMortemPrefab, spawnPoint.position + new Vector3(0, 5, 0), spawnPoint.rotation, 0);
-		//Network.Destroy(this.gameObject);
 		deaths += 1;
-		Respawn();
 		Instantiate(ragdollPrefab, ragdollSpawnPoint.position, ragdollSpawnPoint.rotation);
-	}
-
-	IEnumerator ToOriginalColor() {
-		Debug.Log("Success");
-		yield return new WaitForSeconds(0.25f);
-		playerModel.renderer.material.color = originalColor;
-	}
-
-	void Respawn() {
-		spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length - 1)].transform;
-		spawnPoint.transform.Rotate(new Vector3(0, Random.Range(-360, 360), 0));
-		//Network.Instantiate(playerPrefab, Vector3.up * 5, playerPrefab.transform.rotation, 0);
-		health = maxHealth;
-		transform.position = spawnPoint.position;
-		transform.rotation = spawnPoint.rotation;
-		//rigidbody.velocity = Vector3.zero;
 	}
 
 	private void OnGUI() {

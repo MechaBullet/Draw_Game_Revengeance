@@ -7,7 +7,8 @@ public class EnemyBehavior : MonoBehaviour {
 	private float health;
 	public GameObject ragdoll;
 	private Color origColor;
-	public GameObject characterMesh; 
+	public GameObject characterMesh;
+	public Transform ptsPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -21,14 +22,17 @@ public class EnemyBehavior : MonoBehaviour {
 	}
 
 	public void Damage(float damage) {
-		characterMesh.renderer.material.color = Color.red;
+		//characterMesh.renderer.material.color = Color.red;
 		health -= damage;
-		StartCoroutine(RevertColor());
+		Vector3 v = Camera.main.WorldToViewportPoint(transform.position);
+		//DamageText(damage, v.x, v.y);
 	}
 
-	IEnumerator RevertColor() {
-		yield return new WaitForSeconds(0.2f);
-		characterMesh.renderer.material.color = origColor;
+	void DamageText(float points, float x, float y){
+		x = Mathf.Clamp(x,0.05f,0.95f); // clamp position to screen to ensure
+		y = Mathf.Clamp(y,0.05f,0.9f); // the string will be visible
+		GameObject gui = Instantiate(ptsPrefab,new Vector3(x,y,0),transform.rotation) as GameObject;
+		gui.guiText.text = points.ToString();
 	}
 
 	void Dead() {
