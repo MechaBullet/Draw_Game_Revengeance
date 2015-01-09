@@ -46,17 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Inventory\Scripts\Character.js" />
-     <Compile Include="Assets\Inventory\Scripts\Inventory.js" />
-     <Compile Include="Assets\Inventory\Scripts\InventoryDisplay.js" />
-     <Compile Include="Assets\Inventory\Scripts\Items\EquipmentEffect.js" />
-     <Compile Include="Assets\Inventory\Scripts\Items\FirstPersonPickUp.js" />
-     <Compile Include="Assets\Inventory\Scripts\Items\Item.js" />
-     <Compile Include="Assets\Inventory\Scripts\Items\ItemEffect.js" />
-     <Compile Include="Assets\Inventory\Scripts\Other\ChangeScene.js" />
-     <Compile Include="Assets\Inventory\Scripts\Other\InvAudio.js" />
-     <Compile Include="Assets\Inventory\Scripts\Other\InvPauseGame.js" />
-     <Compile Include="Assets\Inventory\Scripts\Other\WeaponSwitch.js" />
      <Compile Include="Assets\Scripts\Bullet.js" />
      <Compile Include="Assets\Scripts\Flicker.js" />
      <Compile Include="Assets\Scripts\Gradientbackground.js" />
@@ -67,8 +56,8 @@
      <Compile Include="Assets\Scripts\RopeLine.js" />
      <Compile Include="Assets\Scripts\TimeCycle.js" />
      <Compile Include="Assets\Scripts\TubeRenderer.js" />
-     <None Include="Assets\Inventory\Credits + C#.txt" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
+     <None Include="Assets\Shaders\Outline.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>C:/Users/Harrison Cote/Documents/Unity/Draw_game/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
