@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\PlayerInfo.cs" />
      <Compile Include="Assets\Scripts\Shooting.cs" />
      <Compile Include="Assets\Scripts\SimpleSmoothMouseLook.cs" />
+     <None Include="Assets\Inventory\Credits + C#.txt" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>C:/Users/Harrison Cote/Documents/Unity/Draw_game/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>

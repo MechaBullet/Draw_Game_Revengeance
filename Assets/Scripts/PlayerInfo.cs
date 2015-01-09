@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerInfo : MonoBehaviour
 {
+	//Player stats
 	public float maxHealth = 100;
 	public float health;
 	
@@ -41,13 +42,14 @@ public class PlayerInfo : MonoBehaviour
 		if (health < 1) Dead();
 	}
 
-	void Dead() {
+	private void Dead() {
 		Transform ragdollSpawnPoint = this.transform;
 		Debug.Log("Player is dead");
 		deaths += 1;
 		Instantiate(ragdollPrefab, ragdollSpawnPoint.position, ragdollSpawnPoint.rotation);
 	}
 
+	//Draw Crosshair
 	private void OnGUI() {
 			float width = 100;
 			float height = 50;

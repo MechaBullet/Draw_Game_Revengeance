@@ -50,7 +50,7 @@ public class Shooting : MonoBehaviour {
 		if(Physics.Raycast(raycastObject.transform.position, /*new Vector3(fwd.x * displacement.x, fwd.y * displacement.y, fwd.z * displacement.z)*/ fwd, out hit, range)) {
 			if(hit.transform.root.tag == "Enemy") {
 				EnemyBehavior enemyBehavior = hit.transform.gameObject.GetComponent("EnemyBehavior") as EnemyBehavior;
-				enemyBehavior.Damage(damage);
+				enemyBehavior.Damage(damage, hit);
 			}
 		}
 	}
