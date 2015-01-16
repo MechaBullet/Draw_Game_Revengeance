@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyBehavior : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class EnemyBehavior : MonoBehaviour {
 	private Color origColor;
 	public GameObject characterMesh;
 	public GameObject ptsPrefab;
+	public List<Item> inventory;
 
 	// Use this for initialization
 	void Start () {
@@ -42,5 +44,9 @@ public class EnemyBehavior : MonoBehaviour {
 		StatusText("Dead");
 		Instantiate(ragdoll, transform.position, transform.rotation);
 		Destroy(this.gameObject);
+	}
+
+	void DropLoot() {
+
 	}
 }

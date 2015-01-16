@@ -46,13 +46,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ItemBehavior.cs" />
      <Compile Include="Assets\Scripts\DamageText.cs" />
      <Compile Include="Assets\Scripts\EnableCamera.cs" />
      <Compile Include="Assets\Scripts\EnemyBehavior.cs" />
+     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
+     <Compile Include="Assets\Scripts\Inventory\ItemDatabase.cs" />
+     <Compile Include="Assets\Scripts\Inventory\ItemInfo.cs" />
+     <Compile Include="Assets\Scripts\Inventory\PlayerInventory.cs" />
      <Compile Include="Assets\Scripts\NetworkManager.cs" />
      <Compile Include="Assets\Scripts\PlayerInfo.cs" />
-     <Compile Include="Assets\Scripts\PlayerInventory.cs" />
      <Compile Include="Assets\Scripts\Shooting.cs" />
      <Compile Include="Assets\Scripts\SimpleSmoothMouseLook.cs" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />

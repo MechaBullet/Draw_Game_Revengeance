@@ -23,7 +23,6 @@ public class PlayerInfo : MonoBehaviour
 	// Use this for initialization
 	void Awake () {
 		health = maxHealth;
-		Screen.showCursor = false;
 		originalColor = playerModel.renderer.material.color;
 		motor = GetComponent("CharacterMotor") as CharacterMotor;
 		spawnPoints = GameObject.FindGameObjectsWithTag("Spawn");
