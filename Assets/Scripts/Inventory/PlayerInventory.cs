@@ -19,7 +19,7 @@ public class PlayerInventory : MonoBehaviour {
 	private Material origMat;
 	private Material newMat;
 	private GameObject oldFocus;
-	private GameObject currentFocus;
+	private GameObject currentFocus = null;
 	//Inventory GUI
 	public GUISkin skin;
 	//Inventory Variables
@@ -52,7 +52,7 @@ public class PlayerInventory : MonoBehaviour {
 		for(int a = 0; a < weapons.Length; a++) {
 			weapons[a] = new Item();
 		}
-
+		showTooltip = false;
 		database = GameObject.FindGameObjectWithTag("ItemDatabase").GetComponent<ItemDatabase>();
 	}
 	// Update is called once per frame
@@ -73,6 +73,7 @@ public class PlayerInventory : MonoBehaviour {
 			Screen.showCursor = true;
 			DrawInventory();
 			DrawEquipment();
+			DrawStats();
 			if(showTooltip == true && tooltip != "") {
 				GUI.Box(new Rect(Event.current.mousePosition.x + 20, Event.current.mousePosition.y + 20, 200, 50), tooltip);
 			}
@@ -80,10 +81,12 @@ public class PlayerInventory : MonoBehaviour {
 				GUI.DrawTexture(new Rect(Event.current.mousePosition.x, Event.current.mousePosition.y, 64, 64), draggedItem.itemIcon);
 			}
 		}
-		else if(currentFocus != null) {
-			tooltip = CreateToolTip(database.items[currentFocus.GetComponent<ItemInfo>().id]);
-			GUI.Box(new Rect(playerCam.camera.WorldToScreenPoint(currentFocus.transform.position).x, 
-			                 Mathf.Clamp(playerCam.camera.WorldToScreenPoint(currentFocus.transform.position).y, Screen.height/2 - 20, Screen.height/2 + 20), 200, 50), tooltip);
+		else if(currentFocus != null && showTooltip == true) {
+			if(currentFocus.GetComponent<ItemInfo>() != null) {
+				tooltip = CreateToolTip(database.items[currentFocus.GetComponent<ItemInfo>().id]);
+				GUI.Box(new Rect(Mathf.Clamp(playerCam.camera.WorldToScreenPoint(currentFocus.transform.position).x, Screen.width/2 - 300, Screen.height/2 + 300), 
+				                 Mathf.Clamp(playerCam.camera.WorldToScreenPoint(currentFocus.transform.position).y, Screen.height/2 - 40, Screen.height/2 + 40), 200, 50), tooltip);
+			}
 		}
 	}
 
@@ -93,7 +96,7 @@ public class PlayerInventory : MonoBehaviour {
 		//Inventory
 		for(int x = 0; x < slotsX; x++) {
 			for(int y = 0; y < slotsY; y++) {
-				Rect slotRect = new Rect(y * 64, x * 64, 64, 64);
+				Rect slotRect = new Rect(Screen.height/2 - (y * 64), Screen.height/2 - (x * 64), 64, 64);
 				GUI.Box(slotRect, "", skin.GetStyle("Slot"));
 				slots[i] = inventory[i];
 				if(slots[i].itemName != null) {
@@ -145,7 +148,7 @@ public class PlayerInventory : MonoBehaviour {
 		Item.Slot slot;
 		//Equipment Slots
 		for(int z = 0; z < weapons.Length; z++) {
-			Rect equipRect = new Rect (64 * (slotsY + 1), 64 * z, 64, 64);
+			Rect equipRect = new Rect ((Screen.width/2 + (64 * slotsY))/2, Screen.height/2 - (64 * (z +2)), 64, 64);
 			GUI.Box(equipRect, "", skin.GetStyle("Slot"));
 			switch(z) {
 				case 0:
@@ -202,6 +205,21 @@ public class PlayerInventory : MonoBehaviour {
         }
 	}
 
+	void DrawStats() {
+		PlayerInfo info = gameObject.GetComponent<PlayerInfo>() as PlayerInfo;
+		string statText = "Class: " + info.stats.playerClass.ToString() + "\n" +
+				"Health: " + info.health + " / " + info.maxHealth + "\n" +
+				"Level: " + info.stats.level + "\n" +
+				"Experience: " + info.stats.experience + "\n" +
+				"=================================" + "\n" +
+				"Dexterity: " + info.stats.dexterity + "\n" +
+				"Cunning: " + info.stats.cunning + "\n" +
+				"Resolve: " + info.stats.resolve + "\n";
+						  
+
+		GUI.Box(new Rect(Screen.width/2 + 100, Screen.height/2 - 200, 200, 400), statText);
+	}
+
 	string CreateToolTip(Item item) {
 		//Color markup = "<color = #FFF>String</color> , \n"
 		tooltip = item.itemName + "\n <color=#BBB>" + item.itemDesc + "</color>";
@@ -210,15 +228,19 @@ public class PlayerInventory : MonoBehaviour {
 
 	void DetectItems() {
 		if(oldFocus) {
-			foreach (Transform oldChild in oldFocus.transform) {
-				if(oldChild.renderer)
-					oldChild.renderer.material = origMat;
+			if(oldFocus.tag == "Item") {
+				foreach (Transform oldChild in oldFocus.transform) {
+					if(oldChild.renderer)
+						oldChild.renderer.material = origMat;
+				}
 			}
 		}
 		//////////////////////////////////////Picking up items//////////////////////////////////
 		if(Physics.CapsuleCast(playerCam.transform.position, playerCam.transform.position, 2, playerCam.transform.forward, out hit, 10)) {
 			currentFocus = hit.transform.gameObject;
 			if(currentFocus.tag == "Item") {
+				showTooltip = true;
+				currentFocus = hit.transform.gameObject;
 				foreach (Transform child in currentFocus.transform) {
 					if(child.renderer) {
 						if(child.renderer.material != highlightMat) {
@@ -230,6 +252,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			if (Input.GetKeyDown(KeyCode.E)) PickUpItem(currentFocus);
 		}
+		else currentFocus = null;
 		oldFocus = currentFocus;
 	}
 

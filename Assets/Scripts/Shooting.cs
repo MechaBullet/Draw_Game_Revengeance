@@ -20,14 +20,16 @@ public class Shooting : MonoBehaviour {
 		bullets = maxClip;
 	}
 	
-	// Update is called once per frame
+	// Update is called once per frame.
 	void Update () {
+		if(transform.root.tag == "Player") {
 			if(Input.GetMouseButtonDown(0) && bullets > 0 && !firing) {
 				StartCoroutine(Fire());
 			}
 			else if(Input.GetKeyDown(KeyCode.R) && bullets < maxClip && !reloading) {
 				StartCoroutine(Reload(reloadTime));
 			}
+		}
 	}
 
 	void OnGUI()
@@ -43,7 +45,6 @@ public class Shooting : MonoBehaviour {
 
 	void CheckForHit(Vector3 displacement){
 		bullets -= 1;
-		Debug.Log(bullets);
 		RaycastHit hit;
 		Vector3 fwd = raycastObject.transform.TransformDirection(Vector3.forward);
 		Debug.DrawRay(raycastObject.transform.position, fwd, Color.green);

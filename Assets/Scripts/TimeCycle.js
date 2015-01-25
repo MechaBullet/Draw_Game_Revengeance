@@ -1,11 +1,12 @@
 ﻿#pragma strict
 
-var cycleSpeed : float = 5;
+var cycleSpeed : float;
 
 function Start () {
-	InvokeRepeating("RotateSun", cycleSpeed * 2, cycleSpeed);
+	InvokeRepeating("Cycle", cycleSpeed * 2, cycleSpeed);
 }
 
-function RotateSun() {
-	transform.Rotate(-0.025, 0, 0);
+function Cycle() {
+	var targetAngle = Quaternion.Euler(transform.eulerAngles.x + 1, transform.eulerAngles.y, transform.eulerAngles.z);
+	transform.rotation = Quaternion.Lerp(transform.rotation, targetAngle, Time.deltaTime * 2);
 }

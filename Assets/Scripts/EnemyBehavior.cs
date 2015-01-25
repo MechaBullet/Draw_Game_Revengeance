@@ -11,11 +11,13 @@ public class EnemyBehavior : MonoBehaviour {
 	public GameObject characterMesh;
 	public GameObject ptsPrefab;
 	public List<Item> inventory;
+	private ItemDatabase database;
 
 	// Use this for initialization
 	void Start () {
 		health = maxHealth;
 		origColor = characterMesh.renderer.material.color;
+		database = GameObject.FindGameObjectWithTag("ItemDatabase").GetComponent<ItemDatabase>();
 	}
 	
 	// Update is called once per frame
@@ -47,6 +49,12 @@ public class EnemyBehavior : MonoBehaviour {
 	}
 
 	void DropLoot() {
+		for(int i = 0; i < inventory.Count; i++) {
+			SpawnLoot(inventory[i].itemID);
+		}
+	}
 
+	void SpawnLoot(int id) {
+		//database.items[id];
 	}
 }
