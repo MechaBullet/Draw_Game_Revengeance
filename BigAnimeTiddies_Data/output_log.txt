@@ -7,27 +7,35 @@ Direct3D:
     VRAM:     1985 MB (via DXGI)
     Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 INTZ=1 RAWZ=0 NULL=1 RESZ=0 SlowINTZ=0
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
-Loading C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
-Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
-Loading C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
-Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
-Loading C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
-Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.075 seconds
-desktop: 1920x1080 59Hz; virtual: 1920x1080 at 0,0
+Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\Pathfinding.Ionic.Zip.Reduced.dll (this message is harmless)
+Loading C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\Pathfinding.Ionic.Zip.Reduced.dll into Unity Child Domain
+Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\Pathfinding.JsonFx.dll (this message is harmless)
+Loading C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\Pathfinding.JsonFx.dll into Unity Child Domain
+- Completed reload, in  0.207 seconds
+desktop: 1920x1080 59Hz; virtual: 3600x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\Boo.Lang.dll (this message is harmless)
-Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\UnityScript.Lang.dll (this message is harmless)
-Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Draw_game\BigAnimeTiddies_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\Boo.Lang.dll (this message is harmless)
+Platform assembly: C:\Users\Harrison Cote\Documents\Unity\Revengeance\Draw_Game_Revengeance\BigAnimeTiddies_Data\Managed\UnityScript.Lang.dll (this message is harmless)
 You must have a gameobject attached to target: CableB_Node
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Scanning - Process took 61 ms to complete
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
@@ -35,27 +43,39 @@ You must have a gameobject attached to target: CableA_Node
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Picked up LeverRifleItem
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyBehavior.NavigatePath () [0x00000] in <filename unknown>:0 
+  at EnemyBehavior.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Path Completed : Computation Time 4.00 ms Searched Nodes 19 Path Length 5
+Path Number 1
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Picked up RevolverItem
+Path Completed : Computation Time 0.00 ms Searched Nodes 79 Path Length 7
+Path Number 2
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-11
+Path Completed : Computation Time 0.00 ms Searched Nodes 6 Path Length 3
+Path Number 3
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-10
+Path Completed : Computation Time 0.00 ms Searched Nodes 5 Path Length 3
+Path Number 4
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-11
+Path Completed : Computation Time 0.00 ms Searched Nodes 6 Path Length 3
+Path Number 5
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-10
+Path Completed : Computation Time 0.00 ms Searched Nodes 8 Path Length 3
+Path Number 6
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 

@@ -15,7 +15,7 @@ public class PlayerInventory : MonoBehaviour {
 	public GameObject playerCam;
 	private RaycastHit hit;
 	public Material highlightMat;
-
+	private Animator animator;
 	private Material origMat;
 	private Material newMat;
 	private GameObject oldFocus;
@@ -44,6 +44,7 @@ public class PlayerInventory : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start() {
+		animator = transform.root.GetComponent<Animator>();
 		for (int i = 0; i < (slotsX * slotsY); i++)
 		{
 			slots.Add(new Item());
@@ -96,7 +97,7 @@ public class PlayerInventory : MonoBehaviour {
 		//Inventory
 		for(int x = 0; x < slotsX; x++) {
 			for(int y = 0; y < slotsY; y++) {
-				Rect slotRect = new Rect(Screen.height/2 - (y * 64), Screen.height/2 - (x * 64), 64, 64);
+				Rect slotRect = new Rect(Screen.height/2 + ((y-4) * 64), Screen.height/2 + ((x-4) * 64), 64, 64);
 				GUI.Box(slotRect, "", skin.GetStyle("Slot"));
 				slots[i] = inventory[i];
 				if(slots[i].itemName != null) {
@@ -148,7 +149,7 @@ public class PlayerInventory : MonoBehaviour {
 		Item.Slot slot;
 		//Equipment Slots
 		for(int z = 0; z < weapons.Length; z++) {
-			Rect equipRect = new Rect ((Screen.width/2 + (64 * slotsY))/2, Screen.height/2 - (64 * (z +2)), 64, 64);
+			Rect equipRect = new Rect ((Screen.width/2 + (64 * slotsY))/2, Screen.height/2 + (64 * (z - 4)), 64, 64);
 			GUI.Box(equipRect, "", skin.GetStyle("Slot"));
 			switch(z) {
 				case 0:
@@ -228,7 +229,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	void DetectItems() {
 		if(oldFocus) {
-			if(oldFocus.tag == "Item") {
+			if(oldFocus.tag == "Item" || oldFocus.tag == "Interactive") {
 				foreach (Transform oldChild in oldFocus.transform) {
 					if(oldChild.renderer)
 						oldChild.renderer.material = origMat;
@@ -240,7 +241,6 @@ public class PlayerInventory : MonoBehaviour {
 			currentFocus = hit.transform.gameObject;
 			if(currentFocus.tag == "Item") {
 				showTooltip = true;
-				currentFocus = hit.transform.gameObject;
 				foreach (Transform child in currentFocus.transform) {
 					if(child.renderer) {
 						if(child.renderer.material != highlightMat) {
@@ -249,8 +249,19 @@ public class PlayerInventory : MonoBehaviour {
 						}
 					}
 				}
+				if (Input.GetKeyDown(KeyCode.E)) PickUpItem(currentFocus);
 			}
-			if (Input.GetKeyDown(KeyCode.E)) PickUpItem(currentFocus);
+			else if(currentFocus.tag == "Interactive") {
+				foreach (Transform child in currentFocus.transform) {
+					if(child.renderer) {
+						if(child.renderer.material != highlightMat) {
+							origMat = child.renderer.material;
+							child.renderer.material = highlightMat;
+						}
+					}
+				}
+				if (Input.GetKeyDown(KeyCode.E)) currentFocus.GetComponent<Interactive>().Interact();
+			}
 		}
 		else currentFocus = null;
 		oldFocus = currentFocus;

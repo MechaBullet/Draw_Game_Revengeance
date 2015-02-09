@@ -4,6 +4,7 @@ using System.Collections;
 [System.Serializable]
 public class Item {
 	//Basic Item Info
+	public string itemPrefab;
 	public string itemName;
 	public int itemID;
 	public string itemDesc;
@@ -60,5 +61,9 @@ public class Item {
 				slot = Slot.Secondary;
 				break;
 		}
+	}
+
+	public void SetObject(string prefabName) {
+		itemPrefab = "Prefabs/Items/" + prefabName;
 	}
 }

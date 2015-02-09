@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 [AddComponentMenu("Camera-Control/Smooth Mouse Look")]

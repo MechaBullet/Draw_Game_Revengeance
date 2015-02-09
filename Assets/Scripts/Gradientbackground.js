@@ -63,13 +63,6 @@ function Update() {
 //270 = Midnight
 function CheckTime() {
 	time = Mathf.Round(timeCycle.rotation.eulerAngles.x);
-	if (time == 330) {
-		t = 0;
-		oldTopColor = topColor;
-		oldBottomColor = bottomColor;
-		newTopColor = topColors[0];
-		newBottomColor = bottomColors[0];
-	}
 	if (time == 10) {
 		t = 0;
 		oldTopColor = topColor;
@@ -90,6 +83,13 @@ function CheckTime() {
 		oldBottomColor = bottomColor;
 		newTopColor = topColors[3];
 		newBottomColor = bottomColors[3];
+	}
+	if (time == 330) {
+		t = 0;
+		oldTopColor = topColor;
+		oldBottomColor = bottomColor;
+		newTopColor = topColors[0];
+		newBottomColor = bottomColors[0];
 	}
 	topColor = Color.Lerp(oldTopColor, newTopColor, t);
 	bottomColor = Color.Lerp(oldBottomColor, newBottomColor, t);
