@@ -41,7 +41,7 @@ public class AstarPath : MonoBehaviour {
 	 */
 	public static System.Version Version {
 		get {
-			return new System.Version (3,5,9,7);
+			return new System.Version (3,6);
 		}
 	}
 
@@ -452,11 +452,11 @@ public class AstarPath : MonoBehaviour {
 	  */
 	public OnVoidDelegate OnDrawGizmosCallback;
 	
-	/** \obsolete */
+	/** \deprecated */
 	[System.ObsoleteAttribute]
 	public OnVoidDelegate OnGraphsWillBeUpdated;
 
-	/** \obsolete */
+	/** \deprecated */
 	[System.ObsoleteAttribute]
 	public OnVoidDelegate OnGraphsWillBeUpdated2;
 	

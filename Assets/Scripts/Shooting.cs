@@ -7,7 +7,7 @@ public class Shooting : MonoBehaviour {
 	public GameObject raycastObject;
 	public GameObject bullet;
 	//public GameObject cameraObject;
-	bool reloading, firing;
+	public bool reloading, firing;
 	public bool isMelee = false;
 	public bool showCrosshair = true;
 	//Gun Stats
@@ -17,6 +17,7 @@ public class Shooting : MonoBehaviour {
 	bool isPlayer;
 	Effects[] effects;
 	public Transform origin;
+	private int targetLayer;
 
 	public enum Effects{
 		Flaming, Shocking, Freezing
@@ -27,6 +28,17 @@ public class Shooting : MonoBehaviour {
 		if(transform.root.tag == "Player") {
 			isPlayer = true;
 			origin = Camera.main.transform;
+			targetLayer = 12;
+		}
+		else {
+			isPlayer = false;
+			Transform[] allChildren = transform.root.GetComponentsInChildren<Transform>();
+			foreach (Transform child in allChildren) {
+				if (child.name == "Back") {
+					origin = child;
+				}
+			}
+			targetLayer = 13;
 		}
 		bullets = maxClip;
 	}
@@ -78,14 +90,18 @@ public class Shooting : MonoBehaviour {
 	void CheckForHit(Vector3 displacement){
 		bullets -= 1;
 		RaycastHit hit;
-		if(Physics.Raycast(origin.position, origin.forward, out hit, range)) {
+		Debug.DrawRay(origin.position, origin.forward, Color.red, 1.0f, false);
+		if(Physics.Raycast(origin.position, origin.forward, out hit, range, 1 << targetLayer)) {
 			if(hit.transform.root.tag == "Enemy") {
 				EnemyBehavior enemyBehavior = hit.transform.gameObject.GetComponent("EnemyBehavior") as EnemyBehavior;
 				enemyBehavior.Damage(damage, hit);
 			}
+			else if(hit.transform.root.tag == "Player" && tag == "Enemy") {
+				PlayerInfo playerInfo = hit.transform.root.gameObject.GetComponent("PlayerInfo") as PlayerInfo;
+				playerInfo.Damage(damage);
+			}
 		}
 		Instantiate(bullet, origin.position, origin.rotation);
-		firing = false;
 	}
 
 	IEnumerator Reload(float time) {
@@ -96,16 +112,16 @@ public class Shooting : MonoBehaviour {
 	}
 
 	// Fire a bullet 
-	IEnumerator Fire() {
-		if(!isMelee) {
-			firing = true;
-			float xRand = Random.Range(-bulletSpread, bulletSpread);
-			float yRand = Random.Range(-bulletSpread, bulletSpread);
-			Quaternion spread = Quaternion.Euler(xRand, yRand, origin.rotation.z);
-			Vector3 spreadVector = new Vector3(xRand, yRand, 1);
-			CheckForHit(spreadVector);
-			yield return new WaitForSeconds(fireRate);
-		}
+	public IEnumerator Fire() {
+		Debug.Log("Fire!");
+		firing = true;
+		float xRand = Random.Range(-bulletSpread, bulletSpread);
+		float yRand = Random.Range(-bulletSpread, bulletSpread);
+		Quaternion spread = Quaternion.Euler(xRand, yRand, origin.rotation.z);
+		Vector3 spreadVector = new Vector3(xRand, yRand, 1);
+		CheckForHit(spreadVector);
+		yield return new WaitForSeconds(fireRate);
+		firing = false;
 	}
 
 	IEnumerator LerpFoV(float fov) {

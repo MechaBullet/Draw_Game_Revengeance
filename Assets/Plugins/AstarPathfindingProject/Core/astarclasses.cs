@@ -107,8 +107,6 @@ namespace Pathfinding {
 			_MeshEdgeColor = new Color (0,0,0,0.5F);
 			_MeshColor = new Color (0.125F, 0.686F, 0, 0.19F);
 		}
-		
-		//new Color (0.909F,0.937F,0.243F,0.6F);
 	}
 	
 	

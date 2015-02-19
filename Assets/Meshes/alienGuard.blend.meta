@@ -6,7 +6,7 @@ ModelImporter:
     100000: //RootNode
     100002: Back
     100004: Cube
-    100006: Cube_001
+    100006: Cylinder
     100008: Fingers1_Left
     100010: Fingers1_Right
     100012: Fingers2_Left
@@ -33,10 +33,12 @@ ModelImporter:
     100054: Toes_Right
     100056: Upperarm_Left
     100058: Upperarm_Right
+    100060: Hello
+    100062: Cloak
     400000: //RootNode
     400002: Back
     400004: Cube
-    400006: Cube_001
+    400006: Cylinder
     400008: Fingers1_Left
     400010: Fingers1_Right
     400012: Fingers2_Left
@@ -63,14 +65,20 @@ ModelImporter:
     400054: Toes_Right
     400056: Upperarm_Left
     400058: Upperarm_Right
-    4300000: Cube
-    4300002: HumanMale
-    4300004: Cube_001
+    400060: Hello
+    400062: Cloak
+    2300000: Cylinder
+    2300002: Hello
+    3300000: Cylinder
+    3300002: Hello
+    4300000: Cylinder
+    4300002: Hello
+    4300004: HumanMale
     7400000: Default Take
     9500000: //RootNode
     13700000: Cube
-    13700002: Cube_001
-    13700004: HumanMale
+    13700002: HumanMale
+    13700004: Cylinder
   materials:
     importMaterials: 1
     materialName: 0

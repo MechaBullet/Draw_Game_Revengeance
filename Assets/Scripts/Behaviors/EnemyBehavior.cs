@@ -18,6 +18,10 @@ public class EnemyBehavior : MonoBehaviour {
 	private Transform player;
 	private Vector3 oldPos;
 	public float velocity;
+	public GameObject weaponSlot;
+	public Shooting shooting;
+	private float speed;
+	public float attackCutoff;
 
 	// Use this for initialization
 	void Awake () {
@@ -26,6 +30,9 @@ public class EnemyBehavior : MonoBehaviour {
 		ptsPrefab = Resources.Load("Prefabs/DamageText") as GameObject;
 		health = maxHealth;
 		database = GameObject.FindGameObjectWithTag("ItemDatabase").GetComponent<ItemDatabase>();
+		if(weaponSlot) shooting = weaponSlot.GetComponentInChildren<Shooting>();
+		attackCutoff = shooting.GetComponentInChildren<Shooting>().range;
+
 	}
 	
 	// Update is called once per frame
@@ -74,7 +81,6 @@ public class EnemyBehavior : MonoBehaviour {
 	//The calculated path
 	public Path path;
 	//The AI's speed per second
-	public float speed = 20;
 	//The max distance from the AI to a waypoint for it to continue to the next waypoint
 	public float nextWaypointDistance = 3;
 	//The waypoint we are currently moving towards
@@ -127,7 +133,6 @@ public class EnemyBehavior : MonoBehaviour {
 	//====================================================================================================================//
 	public int patrolRange = 60;
 	public float detectionCutoff = 80;
-	public float attackCutoff = 20;
 	private Vector3 trackedPosition;
 
 	private void Scan() {
@@ -136,14 +141,14 @@ public class EnemyBehavior : MonoBehaviour {
 		Vector3 forward = transform.forward;
 		float angle = Vector3.Angle(targetDir, forward);
 		//If enemy is in cone of vision or extremely close
-		if(angle <= 50 || distance < detectionCutoff / 3) {
+		if(angle <= 110 || distance < detectionCutoff / 2.5) {
 			//Start moving toward player
 			securityLevel = 1;
 			//Or if the player is in detection range
 			if(distance < detectionCutoff) {
 				//Start closing in on the player
 				securityLevel = 2;
-					//Or if they are in range to attack
+					//And if they are in range to attack
 					if(distance < attackCutoff) {
 						//Start attacking them
 						securityLevel = 3;
@@ -156,6 +161,7 @@ public class EnemyBehavior : MonoBehaviour {
 	}
 	
 	private void Process() {
+		speed = 350;
 		//Turn off switches when not on the proper alert level
 		if(securityLevel != 0) {
 			if(IsInvoking("Wander")) CancelInvoke("Wander");
@@ -171,9 +177,11 @@ public class EnemyBehavior : MonoBehaviour {
 			Searching(player);
 			break;
 		case 2:
+			speed = 600;
 			Tracking(player);
 			break;
 		case 3:
+			speed = 600;
 			Attacking(player);
 			break;
 		}
@@ -203,13 +211,18 @@ public class EnemyBehavior : MonoBehaviour {
 				StartPath(searchPoint);
 			} else {
 				searching = false;
-				Tracking(target);
+				Patrolling();
 			}
 		}
 	}
 
 	void Attacking(Transform target) {
-
+		if (!shooting.firing) {
+			transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+			StartCoroutine(shooting.Fire());
+			animator.Play("Shoot");
+		}
+		else Tracking(player);
 	}
 
 	void Tracking(Transform target) {
@@ -222,9 +235,5 @@ public class EnemyBehavior : MonoBehaviour {
 			trackedPosition = target.position;
 			StartPath(trackedPosition);
 		}
-	}
-	
-	void Shooting() {
-
 	}
 }

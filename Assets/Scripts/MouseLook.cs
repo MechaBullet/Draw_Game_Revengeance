@@ -18,6 +18,8 @@ public class MouseLook : MonoBehaviour {
 	
 	float rotationX = 0F;
 	float rotationY = 0F;
+	public float moveMultiplier = 0f;
+	public bool arms = false;
 	
 	private List<float> rotArrayX = new List<float>();
 	float rotAverageX = 0F;	
@@ -29,7 +31,7 @@ public class MouseLook : MonoBehaviour {
 	
 	Quaternion originalRotation;
 	
-	void Update ()
+	void LateUpdate ()
 	{
 		if (axes == RotationAxes.MouseXAndY)
 		{			
@@ -105,9 +107,10 @@ public class MouseLook : MonoBehaviour {
 			rotAverageY /= rotArrayY.Count;
 			
 			rotAverageY = ClampAngle (rotAverageY, minimumY, maximumY);
-			
-			Quaternion yQuaternion = Quaternion.AngleAxis (rotAverageY, -Vector3.up);
-			transform.localRotation = originalRotation * yQuaternion;
+			Quaternion yQuaternion;
+			if (arms) yQuaternion = Quaternion.AngleAxis (rotAverageY / moveMultiplier, -Vector3.up);
+			else yQuaternion = Quaternion.AngleAxis (rotAverageY, Vector3.left);
+			transform.localRotation = originalRotation * (yQuaternion);
 		}
 	}
 	
